@@ -1,0 +1,17 @@
+.progress {
+	border-radius:0px; 
+	margin:0%; 
+}
+
+table { 
+	table-layout:fixed;
+	width:100%;
+	border:1px solid #337ab7; 
+}
+table thead td { 
+	background:#337ab7;
+	color:#ededed;
+}
+table tbody>tr:nth-child(even){
+	background:#ededed!important;
+}

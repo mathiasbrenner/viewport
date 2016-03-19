@@ -7,6 +7,7 @@ SECRET_KEY 		= 'deg3dqboek#1th3u51&un6k@qz34mbm-@3-x0nmv70!lvbjptc'
 DEBUG 			= True
 ALLOWED_HOSTS 		= []
 INSTALLED_APPS 		= (
+				'tastypie',
 				'Maps',
     				'django.contrib.auth',
     				'django.contrib.contenttypes',

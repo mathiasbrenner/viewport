@@ -8,5 +8,19 @@
 
 {% block 'body' %}
 	<div id='map'></div> 
-	<a class='btn btn-primary'>Test</a>
+	<table id='address_book'>
+		<thead>
+			<tr>
+				<td colspan='1'>Date</td>
+				<td colspan='1'>Latitude</td>
+				<td colspan='1'>Longitude</td>
+				<td colspan='5'>Address</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<div id='tools'>
+		<a class='btn btn-primary'>Clear table</a>
+	</div>
 {% endblock %} 
