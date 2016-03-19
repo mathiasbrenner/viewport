@@ -10,6 +10,7 @@ class MapMarkerResource(ModelResource):
   class Meta:
     resource_name 	    = 'marker'
     always_return_data      = True
+    ordering                = ('id',)
     queryset                = MapMarker.objects.all()
     allowed_methods         = ['get','patch','post','delete','put',]
     excludes                = []

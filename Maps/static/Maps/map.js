@@ -66,6 +66,8 @@ function onMapClick(e) {
 				var y		= results[0].geometry.location.lng();
 				if (address.indexOf("Unnamed Road")>-1 ) { 
 					loaderError("It is only a road!");
+				} else if (!/\d/.test(address)) {
+					loaderError("Address is not accurate for this point!");
 				} else { 
 					saveAddressToDatabase({ 
 						x:		x,	
@@ -106,6 +108,8 @@ function saveAddressToDatabase(data) {
 						var counter = parseInt($("#total_entries").html());
 						$("#total_entries").html(counter+1);
 						resetLoader();
+					} else if (response.status==500) { 
+						loaderError(response.responseJSON.error_message);
 					} else {
 						loaderError(response.statusText);
                                         }

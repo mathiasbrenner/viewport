@@ -12,7 +12,7 @@ class MapMarker(models.Model):
   class Meta():	
     app_label 		= 'Maps'
     db_table  		= 'MapsMarker'
-    ordering  		= ( '-id', ) 
+    ordering  		= ( 'id', ) 
     unique_together 	= ( 'x', 'y', )
 
   def setPosition(self,x,y):
@@ -27,3 +27,8 @@ class MapMarker(models.Model):
 	
   def getAddress(self):
     return self.address
+
+  def save(self):
+    if MapMarker.objects.filter(x=self.x,y=self.y,address=self.address).count()>0: 
+       raise Exception("Address already exists!")
+    models.Model.save(self)
