@@ -2,13 +2,12 @@
 
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
+import Maps.views
+import Maps.api 
 
-from tastypie.api import Api
-from Maps.api import *
-v1_api = Api(api_name='rest')
-v1_api.register(MapMarkerResource())
+api = Maps.api.MapMarkerResource()
 
-urlpatterns = patterns("Maps", 
-    url(r'^api/', include(v1_api.urls) ),
-    url(r'^.*',   "views.home",        name='map_home' ),
+urlpatterns = (
+    url(r'^api/', include(api.urls) ),
+    url(r'^.*',   Maps.views.home,        name='map_home' ),
 )
