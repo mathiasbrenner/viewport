@@ -7,7 +7,7 @@ SECRET_KEY 		= 'deg3dqboek#1th3u51&un6k@qz34mbm-@3-x0nmv70!lvbjptc'
 DEBUG 			= True
 ALLOWED_HOSTS 		= []
 INSTALLED_APPS 		= (
-    				'django.contrib.admin',
+				'Maps',
     				'django.contrib.auth',
     				'django.contrib.contenttypes',
     				'django.contrib.sessions',
@@ -28,7 +28,9 @@ ROOT_URLCONF 		= 'viewport.urls'
 TEMPLATES 		= [
     				{
         				'BACKEND': 	'django.template.backends.django.DjangoTemplates',
-        				'DIRS': 	[],
+        				'DIRS': 	[
+								os.path.join(BASE_DIR,"viewport","templates"),
+							],
         				'APP_DIRS': 	True,
         				'OPTIONS': 	{
             							'context_processors': [
@@ -53,3 +55,7 @@ USE_I18N 		= True
 USE_L10N 		= True
 USE_TZ 			= True
 STATIC_URL 		= '/static/'
+STATICFILES_DIRS	= (
+        			os.path.join(BASE_DIR,"viewport","static"),
+        			os.path.join(BASE_DIR,"Maps","static"),
+			)

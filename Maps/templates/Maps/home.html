@@ -1,0 +1,12 @@
+{% extends 'skel.html' %} 
+{% load staticfiles %} 
+
+{% block 'head' %}
+	<link rel="stylesheet" href="{% static 'Maps/map.css' %}"/>
+	<script src="{% static 'Maps/map.js' %}"></script>
+{% endblock %} 
+
+{% block 'body' %}
+	<div id='map'></div> 
+	<a class='btn btn-primary'>Test</a>
+{% endblock %} 

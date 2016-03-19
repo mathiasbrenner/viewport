@@ -1,0 +1,24 @@
+{% load staticfiles %} 
+
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta charset="utf-8" >	
+		<title>Viewport Test</title>
+		<meta name="author" content="martincastro.10.5@gmail.com" />
+		<link name='favico' rel="icon" type="image/x-icon" href="{% static 'main/favicon.ico '%}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        	<meta name="description" content="This is my Django web." />
+		<meta name="keywords" content="viewport, martincastro" />
+        	<script src="{% static 'main/jquery-1.10.2.js' %}"></script>
+        	<script src="{% static 'main/bootstrap/js/bootstrap.min.js' %}"></script>
+        	<script src="{% static 'main/viewport.js' %}"></script>
+        	<link rel="stylesheet" href="{% static 'main/bootstrap/css/bootstrap.min.css' %}"/>
+        	<link rel="stylesheet" href="{% static 'main/bootstrap/css/bootstrap-theme.min.css' %}"/>
+        	<link href="{% static 'main/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css" />
+		{% block 'head' %}{% endblock %} 
+	<BODY>
+		{% block 'body' %}{% endblock %} 
+	</BODY>
+</HTML>
