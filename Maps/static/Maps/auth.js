@@ -11,7 +11,7 @@ function resetLoader() {
 	if (isAuthenticated()) 
         	loaderInfo("Click on the map to add an address to the table below!");
 	else
-        	loaderError("Unauthorized!");
+        	loaderError("Unauthorized! Please allow pop-ups!");
 }
 
 $(window).on("load",function(){
