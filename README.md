@@ -1,3 +1,12 @@
+<h3>Instructions</h3>
+git clone https://github.com/Gartlar/viewport.git
+cd viewport
+virtualenv .ve
+soure .ve/bin/activate
+pip install -r requirements
+python manage.py runserver
+<br> 
+
 
 <h3>1) Login to your Google account.</h3>
 ![Alt text](./screenshots/4.png?raw=true "Sample3")
