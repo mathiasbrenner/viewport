@@ -53,7 +53,7 @@ function saveDataToFusionTable(data) {
                         }).then(function(resp) {
                                 resetLoader();
                         }, function(reason) {
-                                loaderError("GoogleAPIError: "+reason.result.error.message);
+                                loaderError("GoogleAPIError while creating marker: "+reason.result.error.message);
                         });
         } else {
                 alert ("Please login to google account by refreshing this page!");

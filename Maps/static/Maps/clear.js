@@ -42,7 +42,7 @@ function deleteFromFusionTable() {
         		}).then(function(resp) {
 				resetLoader();
         		}, function(reason) {
-                		loaderError("GoogleAPIError: "+reason.result.error.message);
+                		loaderError("GoogleAPIError while clearing the database: "+reason.result.error.message);
         		});
 	} else { 
                 alert ("Please login to google account by refreshing this page!");
