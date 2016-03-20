@@ -17,12 +17,14 @@ function loaderInfo(text) {
 }
 
 function loaderON(text) {
+	console.log(text);
 	loaderOFF();
 	$("#top-progress-bar .progress-bar").addClass('progress-bar-info progress-bar-striped active');	
 	$("#top-progress-bar .progress-bar").html(text);
 }
 
 function loaderError(text) {
+	console.log("ERROR "+text);
 	loaderOFF();
 	$("#top-progress-bar .progress-bar").addClass('progress-bar-danger');
 	$("#top-progress-bar .progress-bar").html(text);
@@ -41,16 +43,4 @@ function getCookie(name) {
                 }
         }
         return cookieValue;
-}
-
-function getURLparams() {
-        var urlParams = {};
-        var match,
-                pl     = /\+/g,
-                search = /([^&=]+)=?([^&]*)/g,
-                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-                query  = window.location.search.substring(1);
-        while (match = search.exec(query))
-                urlParams[decode(match[1])] = decode(match[2]);
-        return urlParams;
 }

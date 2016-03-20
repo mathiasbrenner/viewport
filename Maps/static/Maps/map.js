@@ -62,9 +62,7 @@ function onMapClick(e) {
 						y:		y,	
 						address:	address,
 					};
-					saveDataToDatabase(data);
-					saveDataToFusionTable(data);
-					resetLoader();
+					saveData(data);
 				}
 			} else {
 				loaderError("Not a valid address!");

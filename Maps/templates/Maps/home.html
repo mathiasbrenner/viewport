@@ -6,8 +6,6 @@
 	<link rel="stylesheet" href="{% static 'Maps/map.css' %}"/>
 	<script src="{% static 'Maps/auth.js' %}"></script>
 	<script src="{% static 'Maps/map.js' %}"></script>
-	<script src="{% static 'Maps/clear.js' %}"></script>
-	<script src="{% static 'Maps/create.js' %}"></script>
 	<script src="{% static 'Maps/table.js' %}"></script>
 {% endblock %} 
 
@@ -19,7 +17,7 @@
 				<span class="glyphicon glyphicon-trash"></span>	
 				Clear database
 			</a>
-			<a type='button' class='btn btn-default' target='newtab' href='https://www.google.com/fusiontables/DataSource?docid=1CoaFZodTJ1zEilJAN3M5KmHs316fGwAx5pt1vjqA' >
+			<a id='tableLink' type='button' class='btn btn-default' target='newtab'> 
 				<span class="glyphicon glyphicon-th-large"></span>
 				View fusion table
 			</a>
