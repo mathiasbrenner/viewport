@@ -39,5 +39,4 @@ function deleteFromFusionTable() {
 						loaderError("FusionTableError: "+response.responseJSON.error.erros[0].message);
 				}
 		});
-	}
 }
