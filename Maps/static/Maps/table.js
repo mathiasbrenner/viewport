@@ -22,24 +22,3 @@ function loadTableFromDatabase() {
                                 }
 	});
 }
-
-function initAPI() {
-	gapi.client.setApiKey(window.APIKEY);
-	window.setTimeout(checkAuth,1);
-}
-
-function checkAuth() {
-	gapi.auth.authorize({
-		client_id: 	window.CLIENTID, 
-		scope: 		window.SCOPES,
-		immediate: 	true
-	}, handleAuthResult);
-}
-
-function handleAuthResult(authResult) {
-	console.log(authResult);
-	if (authResult.error) 
-		loaderError("GoogleAuthError: "+authResult.error_subtype);
-	else if (authResult.status.google_logged_in) 
-		loaderError("GoogleAuthError: Not logged in to Google!");
-}

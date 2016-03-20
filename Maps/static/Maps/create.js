@@ -1,4 +1,4 @@
-function saveDataToDatabase(data) {
+function saveDataToDatabase(data) { 
 	loaderON("Saving address...");
 	data.csrftoken = getCookie('csrftoken');
         $.ajax({
@@ -38,4 +38,16 @@ function createTableRow(data) {
 	td4.setAttribute("colspan",5);
 	$(tr).html([td1,td2,td3,td4]);
 	$("#address_book tbody").prepend(tr);
+}
+
+function saveDataToFusionTable(data) {
+        $.ajax({
+		url:		"https://www.googleapis.com/fusiontables/v2/query?sql=INSERT+INTO+"+window.TABLEID+"+(x%2Cy%2Caddress)+VALUES+("+data.x+"%2C"+data.y+"%2C'"+encodeURIComponent(data.address)+"')%3B&key="+window.APIKEY,
+                type:           "POST",
+                complete:       function(response) {
+                                        if (response.responseJSON.error.code) {
+                                                console.log(response);
+                                                loaderError("FusionTableError"); 
+                                        }
+                                }
 }

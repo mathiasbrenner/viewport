@@ -2,7 +2,6 @@ window.APIKEY   = "AIzaSyD0zgG3GeK6rLVVWVBG1BuVIENwEyA4fM8";
 window.TABLEID  = "1CoaFZodTJ1zEilJAN3M5KmHs316fGwAx5pt1vjqA"; 
 window.CLIENTID = "102070515856-j5v2vcn40tmruviooice86hgt1nupibc.apps.googleusercontent.com";
 window.SECRET	= "wAQF4_rd2gZWittL75WTithQ";
-window.SCOPES	= "https://www.googleapis.com/auth/fusiontables";
 window.SCOPES	= "https://www.googleapis.com/fusiontables/v2/tables";
 
 function resetLoader() {
@@ -11,9 +10,9 @@ function resetLoader() {
 
 $(window).on("load",function(){ 
 	$("#map").height($(window).height()/2)
+	$("#meta-google-client").attr("content",window.CLIENTID);
 	loadTableFromDatabase();
 	loadScript('http://maps.googleapis.com/maps/api/js?v=3&callback=startMap&key='+window.APIKEY);
-	loadScript('https://apis.google.com/js/client.js?onload=initAPI');
 	loadScript('https://apis.google.com/js/platform.js');
 });
 

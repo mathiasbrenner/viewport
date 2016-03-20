@@ -2,6 +2,7 @@
 {% load staticfiles %} 
 
 {% block 'head' %}
+	<meta id='meta-google-client' name="google-signin-client_id" content="">
 	<link rel="stylesheet" href="{% static 'Maps/map.css' %}"/>
 	<script src="{% static 'Maps/map.js' %}"></script>
 	<script src="{% static 'Maps/clear.js' %}"></script>
@@ -11,12 +12,11 @@
 
 {% block 'body' %}
 	<div id='map'></div> 
-
-<meta name="google-signin-client_id" content="102070515856-j5v2vcn40tmruviooice86hgt1nupibc.apps.googleusercontent.com">
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
 	<div class='row'> 
-		<div class="col-lg-7 btn-group" role="group" >
+		<div class="col-lg-2">
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		</div>
+		<div class="col-lg-10 btn-group" role="group" >
 			<a type='button' class='btn btn-default' onclick='deleteAll()' >
 				<span class="glyphicon glyphicon-trash"></span>	
 				Clear database
@@ -25,15 +25,8 @@
 				<span class="glyphicon glyphicon-th-large"></span>
 				View fusion table
 			</a>
-		</div>
-		<div class="col-lg-2">
-			<span class="glyphicon glyphicon-globe"></span>	
-			Total entries: 
-			<span id='total_entries' class="label label-info">{{total_entries}}</span>	
-		</div>
-		<div class="col-lg-3">
-			<span class="glyphicon glyphicon-user"></span>	
-			<a href='mailto:martincastro.10.5@gmail.com'>
+			<a class='btn btn-default' href='mailto:martincastro.10.5@gmail.com'>
+				<span class="glyphicon glyphicon-envelope"></span>
 				martincastro.10.5@gmail.com
 			</a>
 		</div>
@@ -44,7 +37,10 @@
 				<td colspan='1'>Date</td>
 				<td colspan='1'>Latitude</td>
 				<td colspan='1'>Longitude</td>
-				<td colspan='5'>Address</td>
+				<td colspan='5'>
+					<span id='total_entries' class="label label-info">{{total_entries}}</span>	
+					Address(es)
+				</td>
 			</tr>
 		</thead>
 		<tbody>

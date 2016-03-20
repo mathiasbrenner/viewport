@@ -35,8 +35,10 @@ function deleteFromFusionTable() {
 		url:            "https://www.googleapis.com/fusiontables/v2/query?sql=DELETE+FROM+"+window.TABLEID+"&key="+window.APIKEY,
 		type:           "POST",
 		complete:       function(response) {
-					if (response.responseJSON.error.code) 
-						loaderError("FusionTableError: "+response.responseJSON.error.erros[0].message);
+					if (response.responseJSON.error.code) {
+						console.log(response);
+						loaderError("FusionTableError"); 
+					}
 				}
 		});
 }
