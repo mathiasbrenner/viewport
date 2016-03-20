@@ -1,4 +1,5 @@
-window.APIKEY = "AIzaSyD0zgG3GeK6rLVVWVBG1BuVIENwEyA4fM8";
+window.APIKEY  = "AIzaSyD0zgG3GeK6rLVVWVBG1BuVIENwEyA4fM8";
+window.TABLEID = "1CoaFZodTJ1zEilJAN3M5KmHs316fGwAx5pt1vjqA"; 
 
 function resetLoader() {
 	loaderInfo("Click on the map to add an address to the table below!");
@@ -69,11 +70,13 @@ function onMapClick(e) {
 				} else if (!/\d/.test(address)) {
 					loaderError("Address is not accurate for this point!");
 				} else { 
-					saveAddressToDatabase({ 
+					var data = { 
 						x:		x,	
 						y:		y,	
 						address:	address,
-					});
+					};
+					saveDataToDatabase(data);
+					saveDataToFusionTable(data);
 					resetLoader();
 				}
 			} else {
@@ -88,98 +91,4 @@ function onMapClick(e) {
 				loaderError("UncaughtError! "+status);
 		}
 	}); 
-}
-
-function saveAddressToDatabase(data) {
-	loaderON("Saving address...");
-	data.csrftoken = getCookie('csrftoken');
-        $.ajax({
-                url:            "/Maps/api/marker/",
-                data:           JSON.stringify(data),
-                type:           "POST",
-                contentType:    "application/json",
-                dataType:       'json',
-                beforeSend:     function(xhr) {
-                                        xhr.setRequestHeader("X-CSRFToken", data.csrftoken);
-                                },
-                complete:       function(response) {
-                                        if (response.status>=200 && response.status<300) {
-						createTableRow(response.responseJSON);
-						var counter = parseInt($("#total_entries").html());
-						$("#total_entries").html(counter+1);
-						resetLoader();
-					} else if (response.status==500) { 
-						loaderError(response.responseJSON.error_message);
-					} else {
-						loaderError(response.statusText);
-                                        }
-                                }
-	});
-}
-
-function createTableRow(data) { 
-	var tr 	= document.createElement("tr");	
-	var td1 = document.createElement("td");	
-	var td2 = document.createElement("td");	
-	var td3 = document.createElement("td");	
-	var td4 = document.createElement("td");	
-	td1.innerHTML = data.date;
-	td2.innerHTML = data.x;
-	td3.innerHTML = data.y;
-	td4.innerHTML = data.address;
-	td4.setAttribute("colspan",5);
-	$(tr).html([td1,td2,td3,td4]);
-	$("#address_book tbody").prepend(tr);
-}
-
-function loadTableFromDatabase() {
-	loaderON("Loading database...");
-	var data = {}; 
-	data.csrftoken = getCookie('csrftoken');
-        $.ajax({
-                url:            "/Maps/api/marker/",
-                data:           JSON.stringify(data),
-                type:           "GET",
-                contentType:    "application/json",
-                dataType:       'json',
-                beforeSend:     function(xhr) {
-                                        xhr.setRequestHeader("X-CSRFToken", data.csrftoken);
-                                },
-                complete:       function(response) {
-                                        if (response.status>=200 && response.status<300) {
-						for (var row of response.responseJSON.objects) { 
-							createTableRow(row);
-						}
-					} else {
-						loaderError(response.statusText);
-                                        }
-                                }
-	});
-}
-
-function deleteAllFromDatabase() {
-	if (confirm("Are you sure?")) {
-		loaderON("Deleting database...");
-		var data = {};
-		data.csrftoken = getCookie('csrftoken');
-		$.ajax({
-			url:            "/Maps/api/marker/",
-			data:           JSON.stringify(data),
-			type:           "DELETE",
-			contentType:    "application/json",
-			dataType:       'json',
-			beforeSend:     function(xhr) {
-						xhr.setRequestHeader("X-CSRFToken", data.csrftoken);
-					},
-			complete:       function(response) {
-						if (response.status>=200 && response.status<300) {
-							$("#address_book tbody tr").remove();
-							$("#total_entries").html(0);
-							resetLoader();
-						} else {
-							loaderError(response.statusText);
-						}
-					}
-		});
-	}
 }

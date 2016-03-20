@@ -4,10 +4,36 @@
 {% block 'head' %}
 	<link rel="stylesheet" href="{% static 'Maps/map.css' %}"/>
 	<script src="{% static 'Maps/map.js' %}"></script>
+	<script src="{% static 'Maps/clear.js' %}"></script>
+	<script src="{% static 'Maps/create.js' %}"></script>
+	<script src="{% static 'Maps/table.js' %}"></script>
 {% endblock %} 
 
 {% block 'body' %}
 	<div id='map'></div> 
+	<div class='row'> 
+		<div class="col-lg-7 btn-group" role="group" >
+			<a type='button' class='btn btn-default' onclick='deleteAll()' >
+				<span class="glyphicon glyphicon-trash"></span>	
+				Clear database
+			</a>
+			<a type='button' class='btn btn-default' target='newtab' href='https://www.google.com/fusiontables/DataSource?docid=1CoaFZodTJ1zEilJAN3M5KmHs316fGwAx5pt1vjqA' >
+				<span class="glyphicon glyphicon-th-large"></span>
+				View fusion table
+			</a>
+		</div>
+		<div class="col-lg-2">
+			<span class="glyphicon glyphicon-globe"></span>	
+			Total entries: 
+			<span id='total_entries' class="label label-info">{{total_entries}}</span>	
+		</div>
+		<div class="col-lg-3">
+			<span class="glyphicon glyphicon-user"></span>	
+			<a href='mailto:martincastro.10.5@gmail.com'>
+				martincastro.10.5@gmail.com
+			</a>
+		</div>
+	</div>
 	<table id='address_book'>
 		<thead>
 			<tr>
@@ -20,10 +46,4 @@
 		<tbody>
 		</tbody>
 	</table>
-	<div id='tools'>
-		<a class='btn btn-primary' onclick='deleteAllFromDatabase()' >
-			Clear 
-			<span id='total_entries' class="label label-info">{{total_entries}}</span>	
-		</a>
-	</div>
 {% endblock %} 
