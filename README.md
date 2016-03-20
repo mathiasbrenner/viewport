@@ -1,10 +1,12 @@
 <h3>Instructions</h3>
-git clone https://github.com/Gartlar/viewport.git
-cd viewport
-virtualenv .ve
-soure .ve/bin/activate
-pip install -r requirements
-python manage.py runserver
+<ul>
+<li>git clone https://github.com/Gartlar/viewport.git</li>
+<li>cd viewport</li>
+<li>virtualenv .ve</li>
+<li>soure .ve/bin/activate</li>
+<li>pip install -r requirements</li>
+<li>python manage.py runserver</li>
+</ul>
 <br> 
 
 
