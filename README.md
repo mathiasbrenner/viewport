@@ -7,7 +7,7 @@
 ![Alt text](./screenshots/1.png?raw=true "Sample1")
 <br> 
 
-<h3>3) Everything is stored to SQLite & a Google Fusion table.</h3>
+<h3>3) Everything is stored into a SQLite & Google Fusion database.</h3>
 ![Alt text](./screenshots/2.png?raw=true "Sample2")
 <br> 
 
