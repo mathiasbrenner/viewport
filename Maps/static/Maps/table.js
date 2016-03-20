@@ -74,7 +74,7 @@ function deleteFusionTable() {
 
 function saveData(data) { 
         if (window.TABLEID && isAuthenticated()) {
-		saveDatabase();
+		saveDatabase(data);
 	} /* isAuthenticated */ 
 	else {
 		loaderError("Unauthorized.");

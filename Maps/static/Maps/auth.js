@@ -17,6 +17,7 @@ function resetLoader() {
 
 $(window).on("load",function(){
 	$("#tableLink").hide();
+	$("#clearLink").hide();
         $("#map").height($(window).height()/2)
         $("#meta-google-client").attr("content",window.CLIENTID);
         loadTableFromDatabase();
@@ -60,7 +61,8 @@ function retrieveFusionTable() {
 		while (i<tables.length && tables[i].name != window.TABLENAME ) { 
 			i++;
 		}
-		if (i<tables.length && tables[i].name != window.TABLENAME ) { 
+		if (i<tables.length && tables[i].name == window.TABLENAME ) { 
+			loaderON("Table found!");
 			window.TABLEID = tables[i].tableId;
 			showTableLink();
 			resetLoader();
@@ -77,7 +79,7 @@ function createNewTable() {
 	gapi.client.request({
 		path:  	"/fusiontables/v2/tables",
 		method:	"POST",
-		params: { 
+		body: 	{ 
 				isExportable: 	true,
 				name: 		window.TABLENAME,
 				columns: 	[
@@ -89,7 +91,7 @@ function createNewTable() {
 						],
 			},	
 	}).then(function(resp) {
-		window.TABLEID = resp.tableId;
+		window.TABLEID = resp.result.tableId;
 		resetLoader();
 		showTableLink();
 	}, function(reason) {
@@ -102,5 +104,6 @@ function showTableLink() {
 		var u = "https://www.google.com/fusiontables/DataSource?docid="+window.TABLEID
 		$("#tableLink").attr("href",u);
 		$("#tableLink").show();
+		$("#clearLink").show();
 	}
 }
