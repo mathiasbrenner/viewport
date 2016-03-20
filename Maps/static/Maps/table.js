@@ -22,3 +22,27 @@ function loadTableFromDatabase() {
                                 }
 	});
 }
+
+function onGapiLoad() {
+	loaderON("Authenticating...");
+        gapi.client.setApiKey(window.APIKEY);
+	gapi.auth.authorize({
+		client_id:	window.CLIENTID,	
+		immediate:	true,
+		scope:		window.SCOPES,
+	},onAuthentication);
+}
+
+window.ACCESS_TOKEN = null;
+function onAuthentication(e) {
+	if (e.access_token) {
+		window.ACCESS_TOKEN = e.access_token;
+		resetLoader();
+	} else { 
+		loaderError("GoogleLoginError: Not authenticated!");
+	}
+}
+
+function isAuthenticated() {
+	return window.ACCESS_TOKEN != null;
+}

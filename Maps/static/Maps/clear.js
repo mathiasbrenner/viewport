@@ -19,6 +19,7 @@ function deleteFromDatabase() {
 					xhr.setRequestHeader("X-CSRFToken", data.csrftoken);
 				},
 		complete:       function(response) {
+					loaderON("Reading response from server...");
 					if (response.status>=200 && response.status<300) {
 						$("#address_book tbody tr").remove();
 						$("#total_entries").html(0);
@@ -31,14 +32,20 @@ function deleteFromDatabase() {
 }
 
 function deleteFromFusionTable() {
-	$.ajax({
-		url:            "https://www.googleapis.com/fusiontables/v2/query?sql=DELETE+FROM+"+window.TABLEID+"&key="+window.APIKEY,
-		type:           "POST",
-		complete:       function(response) {
-					if (response.responseJSON.error.code) {
-						console.log(response);
-						loaderError("FusionTableError"); 
-					}
-				}
-		});
-}
+	if (isAuthenticated()) {
+        	gapi.client.request({
+               		path:   "/fusiontables/v2/query",
+                	method: "POST",
+                	params: {
+                        	sql: "DELETE FROM "+window.TABLEID,
+                	}
+        		}).then(function(resp) {
+				resetLoader();
+        		}, function(reason) {
+                		loaderError("GoogleAPIError: "+reason.result.error.message);
+        		});
+	} else { 
+                alert ("Please login to google account by refreshing this page!");
+	}
+};
+

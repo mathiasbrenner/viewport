@@ -11,6 +11,7 @@ function saveDataToDatabase(data) {
                                         xhr.setRequestHeader("X-CSRFToken", data.csrftoken);
                                 },
                 complete:       function(response) {
+					loaderON("Reading response from server");
                                         if (response.status>=200 && response.status<300) {
 						createTableRow(response.responseJSON);
 						var counter = parseInt($("#total_entries").html());
@@ -41,13 +42,21 @@ function createTableRow(data) {
 }
 
 function saveDataToFusionTable(data) {
-        $.ajax({
-		url:		"https://www.googleapis.com/fusiontables/v2/query?sql=INSERT+INTO+"+window.TABLEID+"+(x%2Cy%2Caddress)+VALUES+("+data.x+"%2C"+data.y+"%2C'"+encodeURIComponent(data.address)+"')%3B&key="+window.APIKEY,
-                type:           "POST",
-                complete:       function(response) {
-                                        if (response.responseJSON.error.code) {
-                                                console.log(response);
-                                                loaderError("FusionTableError"); 
-                                        }
-                                }
-}
+        if (isAuthenticated()) {
+		var q = "INSERT INTO "+window.TABLEID+" (x,y,address,Date,location) VALUES ("+data.x+","+data.y+",'"+data.address+"','"+new Date()+"','"+data.x+" "+data.y+"')";
+                gapi.client.request({
+                        path:   "/fusiontables/v2/query",
+                        method: "POST",
+                        params: {
+                                sql: q,
+                        }
+                        }).then(function(resp) {
+                                resetLoader();
+                        }, function(reason) {
+                                loaderError("GoogleAPIError: "+reason.result.error.message);
+                        });
+        } else {
+                alert ("Please login to google account by refreshing this page!");
+        }
+};
+
