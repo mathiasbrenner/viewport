@@ -4,7 +4,7 @@
 <li>cd viewport</li>
 <li>virtualenv .ve</li>
 <li>soure .ve/bin/activate</li>
-<li>pip install -r requirements</li>
+<li>pip install -r requirements.txt</li>
 <li>python manage.py runserver</li>
 </ul>
 <br> 
